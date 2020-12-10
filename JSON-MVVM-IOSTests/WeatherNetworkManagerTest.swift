@@ -1,14 +1,14 @@
 //
-//  JSON_MVVM_IOSTests.swift
+//  WeatherNetworkManagerTest.swift
 //  JSON-MVVM-IOSTests
 //
-//  Created by James Jasenia on 11/11/20.
+//  Created by James Jasenia on 3/12/20.
 //
 
 import XCTest
 @testable import JSON_MVVM_IOS
 
-class JSON_MVVM_IOSTests: XCTestCase {
+class WeatherNetworkManagerTest: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
