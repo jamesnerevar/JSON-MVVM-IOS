@@ -9,9 +9,10 @@ import XCTest
 
 class JSON_MVVM_IOSUITests: XCTestCase {
 
+    let app = XCUIApplication()
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        let app = XCUIApplication()
         app.launchEnvironment = ["ENVIRONMENT" : "TEST"]
         app.launch()
         // In UI tests it is usually best to stop immediately when a failure occurs.
@@ -23,13 +24,18 @@ class JSON_MVVM_IOSUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testEmptyCityTextFieldAlert() {
+        //Arange
+        app.launchEnvironment = ["ENVIRONMENT" : "TEST"]
+        app.launch()
+        
+        //Act
+        app.buttons.element.tap()
+        
+        //Assert
+        XCTAssertTrue(app.staticTexts["AlertHeader"].label == "Invalid City Name")
+        XCTAssertTrue(app.staticTexts["AlertSubheader"].label == "Please enter a valid city name")
     }
 
     func testLaunchPerformance() throws {

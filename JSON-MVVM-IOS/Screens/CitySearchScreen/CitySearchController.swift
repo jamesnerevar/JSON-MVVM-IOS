@@ -8,9 +8,6 @@
 import UIKit
 
 class CitySearchController: UIViewController {
-
-    // MARK:  Properties
-
     
     // MARK:  UI Properties
     private let mainView = CitySearchView()
@@ -24,6 +21,7 @@ class CitySearchController: UIViewController {
         super.viewDidLoad()
         setupView()
         configureButtons()
+        addDelegates()
     }
     
     init(coordinator: MainCoordinator, networkManager: WeatherNetworkManagerProtocol) {
@@ -58,12 +56,17 @@ class CitySearchController: UIViewController {
     
     @objc private func weatherButtonTapped() {
         guard let text = mainView.cityTextField.text, !text.isEmpty else {
-            //UI Test:
-            //Assert that a UIAlert is presented
+            let vc = UIHelper().createAlertViewController()
+            present(vc, animated: true)
             return
         }
         
         getWeatherData(for: text)
+    }
+    
+    // MARK:  Delegates
+    private func addDelegates() {
+        mainView.cityTextField.delegate = self
     }
     
     // MARK:  Data  Management Methods
@@ -79,4 +82,13 @@ class CitySearchController: UIViewController {
             }
         }
     }
+}
+
+extension CitySearchController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return false
+    }
+    
 }

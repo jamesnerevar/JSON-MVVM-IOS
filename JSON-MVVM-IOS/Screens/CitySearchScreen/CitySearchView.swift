@@ -29,16 +29,7 @@ class CitySearchView: UIView {
         return textField
     }()
     
-    lazy var weatherButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Get Weather Information", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.applyCornerRadius(of: 12)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        button.layer.zPosition = 1
-        return button
-    }()
+    let weatherButton = BlueBoxButton(titleText: "Get Weather Information")
     
     // MARK:  Life Cycle Methods
     override init(frame: CGRect) {

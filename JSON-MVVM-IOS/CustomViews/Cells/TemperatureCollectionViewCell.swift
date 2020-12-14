@@ -2,7 +2,7 @@
 //  TemperatureCollectionViewCell.swift
 //  JSON-MVVM-IOS
 //
-//  Created by James Jasenia on 12/11/20.
+//  Created by James Jasenia on 10/12/20.
 //
 
 import UIKit
@@ -13,37 +13,10 @@ class TemperatureCollectionViewCell: UICollectionViewCell {
     static let reuseID: String = "TemperatureCollectionViewCell"
     
     // MARK:  UI Properties
-    lazy var descriptionLabel: HeaderLabel = {
-        let label = HeaderLabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "SUNNY"
-        return label
-    }()
-    
-    lazy var temperatureLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "23"
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 65, weight: .semibold)
-        return label
-    }()
-    
-    lazy var lowTemperatureLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "L: 20"
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy var highTemperatureLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "H: 20"
-        label.textAlignment = .right
-        return label
-    }()
+    let temperatureLabel = GenericLabel(fontSize: 90, fontWeight: .semibold, textAligned: .center)
+    let weatherDescriptionLabel = GenericLabel(fontSize: 20, fontWeight: .light, textAligned: .center)
+    let lowTemperatureLabel = GenericLabel(fontSize: 20, fontWeight: .light, textAligned: .left)
+    let highTemperatureLabel = GenericLabel(fontSize: 20, fontWeight: .light, textAligned: .right)
     
     // MARK:  Life Cycle Methods
     override init(frame: CGRect) {
@@ -56,29 +29,23 @@ class TemperatureCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK:  Accessors
-    public func setDescriptionLabelText(to text: String) {
-        descriptionLabel.text = text
-    }
+    func setTemperatureLabelText(to text: String) { temperatureLabel.text = text }
+    func setWeatherDescriptionLabelText(to text: String) { weatherDescriptionLabel.text = text }
+    func setLowTemperatureLabelText(to text: String) { lowTemperatureLabel.text = text }
+    func setHighTemperatureLabelText(to text: String) { highTemperatureLabel.text = text }
     
-    public func setTemperatureLabelText(to text: String) {
-        temperatureLabel.text = text
-    }
-    
-    public func setLowTemperatureText(to text: String) {
-        lowTemperatureLabel.text = text
-    }
-    
-    public func setHighTemperatureText(to text: String) {
-        highTemperatureLabel.text = text
-    }
-    
-    // MARK:  View Confiruation Methods
+    // MARK:  Setup Methods
     private func setupView() {
-        backgroundColor = .systemGray6
+        configureBackgroundView()
         addTemperatureLabel()
-        addDescriptionLabel()
+        addWeatherDescriptionLabel()
         addLowTemperatureLabel()
         addHighTemperatureLabel()
+    }
+    
+    private func configureBackgroundView() {
+        let backgroundImage = UIImageView(image: UIImage(named: K.AssetKeys.YELLOW_DRIP_BIRD))
+        backgroundView = backgroundImage
     }
     
     // MARK:  Constraints
@@ -87,29 +54,25 @@ class TemperatureCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             temperatureLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            temperatureLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.65),
-            temperatureLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.65)
+            temperatureLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
         ])
     }
     
-    private func addDescriptionLabel() {
-        addSubview(descriptionLabel)
+    private func addWeatherDescriptionLabel() {
+        addSubview(weatherDescriptionLabel)
         
         NSLayoutConstraint.activate([
-            descriptionLabel.bottomAnchor.constraint(equalTo: temperatureLabel.topAnchor, constant: -2.5),
-            descriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+            weatherDescriptionLabel.bottomAnchor.constraint(equalTo: temperatureLabel.topAnchor),
+            weatherDescriptionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }
-    
-
     
     private func addLowTemperatureLabel() {
         addSubview(lowTemperatureLabel)
         
         NSLayoutConstraint.activate([
-            lowTemperatureLabel.leadingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor),
-            lowTemperatureLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor)
+            lowTemperatureLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor),
+            lowTemperatureLabel.leadingAnchor.constraint(equalTo: temperatureLabel.leadingAnchor)
         ])
     }
     
@@ -117,8 +80,8 @@ class TemperatureCollectionViewCell: UICollectionViewCell {
         addSubview(highTemperatureLabel)
         
         NSLayoutConstraint.activate([
-            highTemperatureLabel.trailingAnchor.constraint(equalTo: temperatureLabel.trailingAnchor),
-            highTemperatureLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor)
+            highTemperatureLabel.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor),
+            highTemperatureLabel.trailingAnchor.constraint(equalTo: temperatureLabel.trailingAnchor)
         ])
     }
 }

@@ -23,21 +23,19 @@ class WeatherViewModel {
         let formatttedString = "FORECAST FOR \(rawCityName.uppercased())"
         
         return formatttedString
-    }
-    
-    public func formatForecastText() -> String {
-        let rawCityName = weather.name
-        let formattedString = rawCityName
-        
-        return formattedString
-    }
+    } 
     
     public func formatWeatherDescriptionText() -> String {
-        guard let rawDescription = weather.weather.first?.weatherDescription else {
-            return "No Data Available"
-        }
+        guard let rawDescription = weather.weather.first?.weatherDescription else { return "Description not available" }
+        let formatttedString = rawDescription.capitalized
         
+        return formatttedString
+    }
+    
+    public func formatWeatherDescriptionTextUppercased() -> String {
+        guard let rawDescription = weather.weather.first?.weatherDescription else { return "No Data Available" }
         let formatttedString = rawDescription.uppercased()
+        
         return formatttedString
     }
     
@@ -55,9 +53,23 @@ class WeatherViewModel {
         return formattedString
     }
     
+    public func formatLowTemperatureTextToOneDecimalPlaceWithHeading() -> String {
+        let rawLowTemperature = weather.main.tempMin
+        let formattedString = "Low: \(String(format: "%.1f", rawLowTemperature))°"
+        
+        return formattedString
+    }
+    
     public func formatHighTemperatureTextToOneDecimalPlace() -> String {
         let rawHighTemperature = weather.main.tempMax
         let formattedString = "\(String(format: "%.1f", rawHighTemperature))°"
+        
+        return formattedString
+    }
+    
+    public func formatHighTemperatureTextToOneDecimalPlaceWithHeading() -> String {
+        let rawLowTemperature = weather.main.tempMax
+        let formattedString = "High: \(String(format: "%.1f", rawLowTemperature))°"
         
         return formattedString
     }
@@ -69,9 +81,23 @@ class WeatherViewModel {
         return formattedString
     }
     
+    public func formatWindTextWithHeading() -> String {
+        let rawWindSpeed = weather.wind.speed
+        let formattedString = "Winds: \(rawWindSpeed)km/h"
+        
+        return formattedString
+    }
+    
     public func formatHumidityText() -> String {
         let rawHumidityText = weather.main.humidity
         let formattedString = "\(rawHumidityText)%"
+        
+        return formattedString
+    }
+    
+    public func formatHumidityTextWithHeading() -> String {
+        let rawHumidityText = weather.main.humidity
+        let formattedString = "Humidity: \(rawHumidityText)%"
         
         return formattedString
     }
@@ -83,19 +109,15 @@ class WeatherViewModel {
         return formattedString
     }
     
-    public func formatSunriseText() -> String {
-        
-        //This will be extracted
-        
-        let rawSunriseText = weather.sys.sunrise
-        let formattedString = "\(rawSunriseText)"
+    public func formatCloudsTextWithHeading() -> String {
+        let rawCloudsString = weather.clouds.all
+        let formattedString = "Clouds: \(rawCloudsString)%"
         
         return formattedString
     }
     
-    public func formatSunsetText() -> String {
-        let rawSunsetText = weather.sys.sunset
-        let formattedString = "\(rawSunsetText)"
+    public func formatDetailText() -> String {
+        let formattedString = "\(formatWeatherDescriptionText()) today with winds of \(formatWindText()). The high will be \(formatHighTemperatureTextToOneDecimalPlace()) with a low of \(formatLowTemperatureTextToOneDecimalPlace())"
         
         return formattedString
     }
