@@ -9,7 +9,8 @@ import Foundation
 
 class WeatherNetworkManager: WeatherNetworkManagerProtocol {
     
-    private let API_KEY: String = "6411c5922da143963ead29a22de0b08e"
+    //Add your own API_KEY
+    private let API_KEY: String = ""
     
     func getWeatherData(for cityName: String, completion: @escaping (Result<WeatherModel, NetworkError>) -> Void) {
         
