@@ -5,7 +5,7 @@ Note: You will need to add your own API Key to the WeatherNetworkManager.
 ![find](/WGAppScreenshots.png)
 
 ### Purpose: 
-The purpose of this app is to demonstrate my understanding of iOS Development and the variety of technologies avilable through Apple's APIs.
+The purpose of this app is to demonstrate my understanding of iOS Development and the variety of technologies available through Apple's APIs.
 
 ### Technologies:
 - UIKit/Xcode
@@ -22,7 +22,7 @@ The purpose of this app is to demonstrate my understanding of iOS Development an
 ### Design:
 - Programmatic Layout
 
-### Side Note:
+### Illustrations:
 - All of the illustrations were created by me.
  
  
@@ -30,7 +30,7 @@ The purpose of this app is to demonstrate my understanding of iOS Development an
  
 # Architecture:
 ## Coordinators
-I probably wouldn't use a Coordinator with a two screen app, however, as the purpose of this code base is to demonstrate my understanding of different iOS coding practices, I have included it in this code base. With other apps I have developed, that a variety of longer navigation stacks, I have found the coordiantor pattern to be a clean approach that keeps the code decoupled and easy to change. I have attached an example of how I have used the Coorinator pattern in this app.
+I usually wouldn't use a Coordinator with a two screen app. However, as the purpose of this code base is to demonstrate my understanding of different iOS coding practices I have included it in this code base. Having developed other apps that use a variety of longer navigation stacks, I have found the Coordinator pattern to be a clean approach that keeps the code decoupled and easy to change. I have attached an example of how I have used the Coordinator pattern in this app.
 
 ```
 
@@ -65,7 +65,7 @@ class MainCoordinator: Coordinator {
 
 # Network Layer
 ## URLSession
-I have used URLSession and the Result type to handle the NetworkRequest to the Open Weather API. Full disclosure, a lot of my work with RESTFUL APIs has been FETCH requests. I am yet to build any application that handles POST requests.
+I have used URLSession and the Result type to handle the NetworkRequest to the OpenWeather API. Primarily, my work with RESTFUL APIs has been performing FETCH requests. I am yet to build any application that handles POST requests.
 
 ```
 import Foundation
@@ -134,7 +134,7 @@ enum NetworkError: String, Error {
 
 # Testing - Still learning :)
 ## Unit Testing
-I am beginnning to appreciate the benefits from unit testing from a workflow perspective. Running unit tests on method with clear inputs and outputs helps improves my confidence that the method, and by extension, the module is performing the role I am expecting it to. In addition, the process of writing unit tests have helped me uncover edge cases I need to consider. I am slowly finding that my Command-U is becoming the new Command-R. Below is a code snipet of testing a View Model object.
+I am beginning to appreciate the benefits of unit testing from a workflow perspective. Running unit tests on methods with clear inputs and outputs improves my confidence that the method, and by extension the module, is performing the role I am expecting it to. In addition, the process of writing unit tests has helped me uncover edge cases I need to consider. I am finding that Command-U is becoming the new Command-R. Below is a code snipet of testing a View Model object.
 
 ```
 import XCTest
